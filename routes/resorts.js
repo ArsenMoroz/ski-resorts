@@ -63,7 +63,7 @@ router.get("/:id", function(req,res){
             console.log(err);
         }else{
            //render show template with that resort
-           res.render("resorts/show", {resort: foundResort});
+           res.render("resorts/show", {resort: foundResort, page: "resorts"});
         }
     });
 });
