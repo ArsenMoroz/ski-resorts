@@ -1,86 +1,86 @@
 body {
-    background: #000;
+  background-color: #000;
 }
 
 #landing-header {
-    z-index: 1;
-    position: relative;
-    text-align: center;
-    padding-top: 40vh;
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  padding-top: 40vh;
 }
 
 #landing-header h1 {
-    color: #fff;
+  color: #fff;
 }
 
 .slideshow { 
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .slideshow li { 
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-size: cover;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    opacity: 0;
-    z-index: 0;
-    animation: imageAnimation 50s linear infinite; 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite; 
 }
 
 .slideshow li:nth-child(1) { 
-    background-image: url(https://cdn.wallpapersafari.com/44/25/rmAEVR.jpg) 
+  background-image: url(https://cdn.wallpapersafari.com/44/25/rmAEVR.jpg) 
 }
 
 .slideshow li:nth-child(2) { 
-  background-image: url(https://img5.goodfon.com/wallpaper/nbig/4/d5/zima-sneg-gory-spusk-lyzhniki-lyzhnyi-sport-palki-lyzhi-soln.jpg);
-  animation-delay: 10s; 
+background-image: url(https://img5.goodfon.com/wallpaper/nbig/4/d5/zima-sneg-gory-spusk-lyzhniki-lyzhnyi-sport-palki-lyzhi-soln.jpg);
+animation-delay: 10s; 
 }
 
 .slideshow li:nth-child(3) { 
-  background-image: url(https://www.wallpaperback.net/wp-content/uploads/2018/06/Wallpaper%20Himalayas,%205k,%204k%20wallpaper,%208k,%20Kangchenjunga,%20snowboarding,%20mountains,%20travel,%20snow,%20Sport%20129788902.jpg);
-  animation-delay: 20s; 
+background-image: url(https://www.wallpaperback.net/wp-content/uploads/2018/06/Wallpaper%20Himalayas,%205k,%204k%20wallpaper,%208k,%20Kangchenjunga,%20snowboarding,%20mountains,%20travel,%20snow,%20Sport%20129788902.jpg);
+animation-delay: 20s; 
 }
 
 .slideshow li:nth-child(4) { 
-  background-image: url(https://cdn.hipwallpaper.com/i/62/10/w21Wnj.jpg);
-  animation-delay: 30s; 
+background-image: url(https://cdn.hipwallpaper.com/i/62/10/w21Wnj.jpg);
+animation-delay: 30s; 
 }
 
 .slideshow li:nth-child(5) { 
-  background-image: url(https://wallpapercrafter.com/uploads/posts/52134-___person-mountain-winter-and-skiing-hd.jpg);
-  animation-delay: 40s; 
+background-image: url(https://wallpapercrafter.com/uploads/posts/52134-___person-mountain-winter-and-skiing-hd.jpg);
+animation-delay: 40s; 
 }
 
 @keyframes imageAnimation { 
-    0% { 
-      opacity: 0; 
-      animation-timing-function: ease-in;
-    }
-    10% {
-      opacity: 1;
-      animation-timing-function: ease-out;
-    }
-    20% {
-      opacity: 1
-    }
-    30% {
-      opacity: 0
-    }
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
   }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}
 
 /* Older browser support - .no-cssanimations class added by modernizr */
 .no-cssanimations .slideshow li {
-	opacity: 1;
+    opacity: 1;
 }

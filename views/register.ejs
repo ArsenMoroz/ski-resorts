@@ -1,6 +1,4 @@
-<%- include ("./partials/header") %>
-
-<h1>Sign Up!</h1>
+<% include ./partials/header %> 
 
 <div class="row">
     <h1 style="text-align: center">Sign Up</h1>
@@ -13,11 +11,15 @@
                 <input class="form-control" type="password" name="password" placeholder="password">
             </div>
             <div class="form-group">
+                <input class="form-control" type="text" name="adminCode" placeholder="Admin code">
+            </div>
+            <div class="form-group">
                 <button class="btn btn-lg btn-primary btn-block">Sign Up!</button>
             </div>
+
         </form>
-        <a href="/resorts">Go Back</a>
+        <a href="/campgrounds">Go Back</a>
     </div>
 </div>
 
-<%- include ("./partials/footer") %>
+<% include ./partials/footer %> 

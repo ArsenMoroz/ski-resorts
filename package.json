@@ -1,25 +1,34 @@
 {
-  "name": "ski_resort",
+  "name": "skiresort",
   "version": "1.0.0",
-  "description": "Find the best resort and order it",
+  "description": "Ski resort order",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Arsen Moroz",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.14.1",
     "connect-flash": "^0.1.1",
-    "ejs": "^3.1.3",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "method-override": "^3.0.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "method-override": "^2.3.5",
     "moment": "^2.27.0",
-    "mongodb": "^3.5.8",
-    "mongoose": "^5.9.16",
-    "passport": "^0.4.1",
+    "mongoose": "^5.2.0",
+    "passport": "^0.3.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.0.1"
-  }
+    "passport-local-mongoose": "^3.1.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArsenMoroz/ski-resorts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArsenMoroz/ski-resorts/issues"
+  },
+  "homepage": "https://github.com/ArsenMoroz/ski-resorts#readme"
 }
