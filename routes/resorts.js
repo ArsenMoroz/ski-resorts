@@ -6,14 +6,30 @@ var middleware = require("../middleware");
 
 //INDEX - show all resorts
 router.get("/", function(req, res){
-    // Get all resorts from DB
-    Resort.find({}, function(err, allResorts){
-       if(err){
-           console.log(err);
-       } else {
-          res.render("resorts/index",{resorts:allResorts, page: 'resorts'});
-       }
-    });
+    var noMatch = '';
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        // Get all resorts from DB
+        Resort.find({name: regex}, function(err, allResorts){
+            if(err){
+                console.log(err);
+            } else {
+                if(allResorts.length < 1){
+                    noMatch = "No resorts match that query, please try again";
+                }
+                res.render("resorts/index",{resorts:allResorts, page: 'resorts', noMatch: noMatch});
+            }
+         });
+    }else{
+        // Get all resorts from DB
+        Resort.find({}, function(err, allResorts){
+           if(err){
+               console.log(err);
+           } else {
+              res.render("resorts/index",{resorts:allResorts, page: 'resorts', noMatch: noMatch});
+           }
+        });
+    }
 });
 
 //CREATE - add new resort to DB
@@ -100,5 +116,9 @@ router.delete("/:id",middleware.checkResortOwnership, function(req, res){
       }
    });
 });
+
+function escapeRegex(text){
+    return text.replace(/[-\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
