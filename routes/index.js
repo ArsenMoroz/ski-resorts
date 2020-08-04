@@ -2,9 +2,11 @@ var express = require("express");
 var router  = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
+var Resort = require("../models/resort")
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+
 
 require('dotenv').config();
 
@@ -20,7 +22,13 @@ router.get("/register", function(req, res){
 
 //handle sign up logic
 router.post("/register", function(req, res){
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({
+                  username: req.body.username,
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: req.body.email,
+                  avatar: req.body.avatar 
+    });
     if(req.body.adminCode === 'secretCode'){
         newUser.isAdmin = true;
     }
@@ -52,6 +60,23 @@ router.get("/logout", function(req, res){
    req.logout();
    req.flash("success", "Logged you out!");
    res.redirect("/resorts");
+});
+
+//Users profile 
+router.get("/users/:id", function(req, res){
+  User.findById(req.params.id, function(err, foundUser){
+    if(err){
+      req.flash("error", "Something went wrong.");
+      res.redirect("/");
+    }
+    Resort.find().where('author.id').equals(foundUser._id).exec(function(err, resorts){
+      if(err){
+        req.flash("error", "Something went wrong.");
+        res.redirect("/");
+      }
+      res.render("users/show", {user: foundUser, resorts: resorts}); 
+    })
+  });
 });
 
 router.get("/forgot", function(req,res){

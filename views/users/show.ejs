@@ -1,0 +1,28 @@
+<% include ../partials/header %> 
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <h1><%= user.firstName + " " + user.lastName %></h1>
+            <img src="<%= user.avatar %>" alt="user profile image">
+        </div>
+        <div class="caption"><a href="mailto:<%= user.email %>"><%= user.email %></a></div>
+    
+    Fugiat quis in ut amet eu mollit duis nisi ea amet sunt. Ad mollit do proident esse amet incididunt. Do laboris est laboris nostrud deserunt proident in irure occaecat deserunt in ipsum. Do aliqua labore occaecat enim duis incididunt eiusmod laboris fugiat minim. Exercitation nulla in qui excepteur eu et id ea.
+
+Aute laborum sint veniam duis commodo occaecat amet consequat sint amet labore mollit. Cupidatat eiusmod amet anim elit proident sit aliquip. Labore ex do in mollit do. Commodo ex tempor exercitation qui adipisicing eiusmod excepteur dolor cillum reprehenderit deserunt labore nostrud Lorem. Dolore aliquip nulla pariatur cillum fugiat incididunt culpa elit sit eiusmod aliqua amet voluptate. Dolor minim ex sit deserunt fugiat ut velit velit ea nostrud consectetur nisi velit labore. Quis cillum eu veniam nulla sunt.
+
+Sint do anim excepteur fugiat aliqua fugiat labore ullamco ipsum sunt id ea. Anim cillum ipsum tempor sunt. Culpa id eu quis nisi consequat ullamco incididunt sunt labore id.
+        </div>
+        <div class="col-md-8">
+            <h2><%= user.username %>'s resorts</h2>
+            <ul>
+            <% resorts.forEach(function(resort){ %>
+                <li><a href="/resorts/<%=resort.id%>"><%=resort.name%></a></li>
+            <% }); %>
+            </ul>   
+        </div>
+</div>
+
+<% include ../partials/footer %> 

@@ -17,7 +17,7 @@
                     <h4><a><%=resort.name%></a></h4>
                     <p><%= resort.description %></p>
                     <p>
-                        <em>Submitted by: <%= resort.author.username %>, <%= moment(resort.createdAt).fromNow() %></em>
+                        <em>Submitted by: <a href="/users/<%= resort.author.id %>"><%= resort.author.username %></a>, <%= moment(resort.createdAt).fromNow() %></em>
                     </p>
                     <% if(currentUser && resort.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
                         <a class="btn btn-xs btn-warning" href="/resorts/<%= resort._id %>/edit">Edit</a>
