@@ -25,14 +25,23 @@
         <% resorts.forEach(function(resort){ %>
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnail">
-                   <img src="<%= resort.image %>">
-                   <div class="caption">
-                       <h4><%= resort.name %></h4>
-                   </div>
-                   <p>
-                       <a href="/resorts/<%= resort._id %>" class="btn btn-primary">More Info</a>
-                   </p>
-                </div>
+                    <img src="<%= resort.image %>">
+                    <div class="caption">
+                        <h4><%= resort.name %></h4>
+                        <% if (resort.rating === 0) { %>
+                        <em>No reviews yet.</em>
+                        <% } else { %>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star <% if (resort.rating > 1.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (resort.rating > 2.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (resort.rating > 3.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star <% if (resort.rating > 4.5) { %> checked <% } %>"></span>
+                        <% } %>
+                    </div>
+                    <p>
+                        <a href="/resorts/<%= resort._id %>" class="btn btn-primary">More Info</a>
+                    </p>
+                 </div>
             </div>
         <% }); %>
     </div>

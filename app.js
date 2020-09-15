@@ -11,7 +11,8 @@ var express         = require("express"),
     
 //requiring routes
 var commentRoutes    = require("./routes/comments"),
-    resortRoutes = require("./routes/resorts"),
+    reviewRoutes     = require("./routes/reviews"),
+    resortRoutes     = require("./routes/resorts"),
     indexRoutes      = require("./routes/index")
     
 mongoose.connect("mongodb://localhost/ski_resort", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
@@ -40,6 +41,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
+   
    res.locals.error = req.flash("error");
    res.locals.success = req.flash("success");
    next();
@@ -48,6 +50,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/resorts", resortRoutes);
 app.use("/resorts/:id/comments", commentRoutes);
+app.use("/resorts/:id/reviews", reviewRoutes);
 
 
 app.listen(3000, function(){

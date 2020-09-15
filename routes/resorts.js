@@ -1,6 +1,7 @@
 var express = require("express");
 var router  = express.Router();
 var Resort = require("../models/resort");
+var Review = require("../models/review");
 var middleware = require("../middleware");
 
 
@@ -70,17 +71,49 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 });
 
 // SHOW - shows more info about one resort
-router.get("/:id", function(req, res){
+router.get("/:id", function (req, res) {
     //find the resort with provided ID
-    Resort.findById(req.params.id).populate("comments").exec(function(err, foundResort){
-        if(err){
-            req.flash("error", err.message);
+    Resort.findById(req.params.id).populate("comments").populate({
+        path: "reviews",
+        options: {sort: {createdAt: -1}}
+    }).exec(function (err, foundResort) {
+        if (err) {
             console.log(err);
-        } else { 
-            console.log(foundResort)
+        } else {
             //render show template with that resort
             res.render("resorts/show", {resort: foundResort});
         }
+    });
+});
+
+// Resort Like Route
+router.post("/:id/like", middleware.isLoggedIn, function (req, res) {
+    Resort.findById(req.params.id, function (err, foundResort) {
+        if (err) {
+            console.log(err);
+            return res.redirect("/resorts");
+        }
+
+        // check if req.user._id exists in foundResort.likes
+        var foundUserLike = foundResort.likes.some(function (like) {
+            return like.equals(req.user._id);
+        });
+
+        if (foundUserLike) {
+            // user already liked, removing like
+            foundResort.likes.pull(req.user._id);
+        } else {
+            // adding the new user like
+            foundResort.likes.push(req.user);
+        }
+
+        foundResort.save(function (err) {
+            if (err) {
+                console.log(err);
+                return res.redirect("/resorts");
+            }
+            return res.redirect("/resorts/" + foundResort._id);
+        });
     });
 });
 
@@ -100,21 +133,51 @@ router.put("/:id",middleware.checkResortOwnership, function(req, res){
             req.flash("error", err.message);
             return res.redirect("back");
         }
+        else {
+            resort.name = req.body.resort.name;
+            resort.description = req.body.resort.description;
+            resort.image = req.body.resort.image;
+            resort.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    res.redirect("/resorts");
+                } else {
+                    res.redirect("/resorts/" + resort._id);
+                }
+            })
            //redirect somewhere(show page)
-           req.flash("success","Successfully Updated!");
-           res.redirect("/resorts/" + req.params.id);
+           //req.flash("success","Successfully Updated!");
+           //res.redirect("/resorts/" + req.params.id);
+        };
     });
 });
 
 // DESTROY CAMPGROUND ROUTE
-router.delete("/:id",middleware.checkResortOwnership, function(req, res){
-   Resort.findByIdAndRemove(req.params.id, function(err){
-      if(err){
-          res.redirect("/resorts");
-      } else {
-          res.redirect("/resorts");
-      }
-   });
+router.delete("/:id", middleware.checkResortOwnership, function (req, res) {
+    Resort.findById(req.params.id, function (err, resort) {
+        if (err) {
+            res.redirect("/resorts");
+        } else {
+            // deletes all comments associated with the resort
+            Comment.remove({"_id": {$in: resort.comments}}, function (err) {
+                if (err) {
+                    console.log(err);
+                    return res.redirect("/resorts");
+                }
+                // deletes all reviews associated with the resort
+                Review.remove({"_id": {$in: resort.reviews}}, function (err) {
+                    if (err) {
+                        console.log(err);
+                        return res.redirect("/resorts");
+                    }
+                    //  delete the resort
+                    resort.remove();
+                    req.flash("success", "Resort deleted successfully!");
+                    res.redirect("/resorts");
+                });
+            });
+        }
+    });
 });
 
 function escapeRegex(text){
