@@ -2,6 +2,7 @@ var express = require("express");
 var router  = express.Router();
 var Resort = require("../models/resort");
 var Review = require("../models/review");
+var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
 
@@ -134,15 +135,15 @@ router.put("/:id",middleware.checkResortOwnership, function(req, res){
             return res.redirect("back");
         }
         else {
-            resort.name = req.body.resort.name;
-            resort.description = req.body.resort.description;
-            resort.image = req.body.resort.image;
-            resort.save(function (err) {
+            updatedResort.name = req.body.resort.name;
+            updatedResort.description = req.body.resort.description;
+            updatedResort.image = req.body.resort.image;
+            updatedResort.save(function (err) {
                 if (err) {
                     console.log(err);
                     res.redirect("/resorts");
                 } else {
-                    res.redirect("/resorts/" + resort._id);
+                    res.redirect("/resorts/" + updatedResort._id);
                 }
             })
            //redirect somewhere(show page)

@@ -1,15 +1,11 @@
 <% include ../partials/header %>
 
     <div class="row">
-        <div class="col-md-3">
-            <p class="lead">SkiResort</p>
-            <div class="list-group">
-                <li class="list-group-item active">Info 1</li>
-                <li class="list-group-item">Info 2</li>
-                <li class="list-group-item">Info 3</li>
-            </div>
+        <div class="col-md-2">
+
         </div>
-        <div class="col-md-9">
+
+        <div class="col-md-8">
             <div class="thumbnail">
                 <img class="img-responsive" src="<%= resort.image %>">
                 <div class="caption-full">
@@ -32,11 +28,11 @@
                                     <i class="fa fa-thumbs-up"></i> Liked (<%= resort.likes.length %>)
                                 </button>
                                 <% } else { %>
-                                <button class="btn btn-sm btn-secondary">
+                                <button style="background:#fffb02a3 !important" class="btn btn-sm btn-secondary">
                                     <i class="fa fa-thumbs-up"></i> Like (<%= resort.likes.length %>)
                                 </button>
                                 <% } %>
-                                <button type="button" class="btn btn-sm btn-default" data-toggle="modal"
+                                <button type="button" onMouseOver="this.style.background='#fffb02a3'" onMouseOut="this.style.background='white'" class="btn btn-sm btn-default" data-toggle="modal"
                                         data-target="#resortLikes">See more details
                                 </button>
                             </div>
@@ -110,7 +106,7 @@
     </div>
 </div>
 
-            <div class="well">
+            <div style="background:#fffb02a3 !important" class="well">
                 <div class="text-right">
                     <a class="btn btn-success" href="/resorts/<%= resort._id %>/comments/new">Add New Comment</a>
                 </div>
