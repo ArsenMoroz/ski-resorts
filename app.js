@@ -14,8 +14,14 @@ var commentRoutes    = require("./routes/comments"),
     reviewRoutes     = require("./routes/reviews"),
     resortRoutes     = require("./routes/resorts"),
     indexRoutes      = require("./routes/index")
-    
-mongoose.connect("mongodb://localhost/ski_resort", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
+mongoose.connect(process.env.URL)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
